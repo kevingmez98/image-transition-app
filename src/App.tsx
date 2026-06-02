@@ -7,6 +7,8 @@ import { exportSingleImage } from "./utils/exportSingleImage";
 import { loadImage } from "./utils/loadImage";
 import { getOptimalSize } from "./utils/getOptimalSize";
 import { BrokenEffect } from "./effects/broken/BrokenEffect";
+import { BattleEffect1 } from "./effects/pokemon/battle-pokemon-1/BattleEffect1";
+import { BattleEffect1DirectReveal } from "./effects/pokemon/battle-pokemon-1/BattleEffect1DirectReveal";
 
 function App() {
   const [imageA, setImageA] = useState<HTMLImageElement | null>(null);
@@ -14,6 +16,7 @@ function App() {
   const [autoSize, setAutoSize] = useState(true);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [showPreview, setShowPreview] = useState(false);
+  const duration = 3000;
 
   const handleUpload = async (file: File, type: 'A' | 'B') => {
     const img = await loadImage(file);
@@ -146,7 +149,7 @@ function App() {
         {showPreview && imageA && imageB && (
           <div className="bg-white p-6 rounded-2xl shadow space-y-4">
             <h2 className="font-semibold text-lg">3. Preview</h2>
-            <PreviewCanvas from={imageA} to={imageB} size={size} />
+            <PreviewCanvas from={imageA} to={imageB} size={size} duration={duration}/>
           </div>
         )}
 
@@ -157,17 +160,18 @@ function App() {
 
             <div className="flex flex-wrap gap-3">
               <ExportButton
-                effect={ShatterEffect}
+                effect={BattleEffect1}
                 imageA={imageA}
                 imageB={imageB}
                 size={size}
               />
 
               <ExportVideoButton
-                effect={BrokenEffect}
+                effect={BattleEffect1DirectReveal}
                 imageA={imageA}
                 imageB={imageB}
                 size={size}
+                duration={duration}
               />
 
               <button

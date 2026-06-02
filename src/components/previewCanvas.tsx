@@ -1,5 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { AnimationLoop } from '../canvas/animationLoop';
+import { BattleEffect1 } from '../effects/pokemon/battle-pokemon-1/BattleEffect1';
+import { BattleEffect1DirectReveal } from '../effects/pokemon/battle-pokemon-1/BattleEffect1DirectReveal';
 import { FadeEffect } from '../effects/fade/FadeEffect';
 import { ZoomEffect } from '../effects/zoom/ZoomEffect';
 import { WipeEffect } from '../effects/wipe/WipeEffect';
@@ -12,6 +14,7 @@ type Props = {
     from: HTMLImageElement;
     to: HTMLImageElement;
     size: RenderSize;
+    duration: number;
 };
 
 export const PreviewCanvas = ({ from, to, size }: Props) => {
@@ -36,13 +39,15 @@ export const PreviewCanvas = ({ from, to, size }: Props) => {
         // const effect = new ZoomEffect();
         //const effect = new WipeEffect();
        // const effect = new ShatterEffect();
-       const effect = new BrokenEffect();
-        effect.init(ctx, {
+       //const effect = new BrokenEffect();
+      // const effect = new BattleEffect1(); 
+       const effect = new BattleEffect1DirectReveal(); 
+       effect.init(ctx, {
             from: from,
             to: to
         },
             { width: size.width, height: size.height })
-        const loop = new AnimationLoop(6000, (progress) => {
+        const loop = new AnimationLoop(3000, (progress) => {
             effect.render(progress);
         });
 

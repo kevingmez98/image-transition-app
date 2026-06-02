@@ -6,14 +6,16 @@ type Props = {
   effect: new () => Effect;
   imageA: HTMLImageElement | null;
   imageB: HTMLImageElement | null;
-  size: RenderSize
+  size: RenderSize,
+  duration: number;
 };
 
 export const ExportVideoButton = ({
   effect,
   imageA,
   imageB,
-  size
+  size,
+  duration
 }: Props) => {  
   const handleExport = async () => {
     if (!imageA || !imageB) return;
@@ -22,7 +24,7 @@ export const ExportVideoButton = ({
       effect,
       { from: imageA, to: imageB },
       size,
-      6000,
+      duration,
       30
     );
 
